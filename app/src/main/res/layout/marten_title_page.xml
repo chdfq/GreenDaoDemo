@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/blue">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:background="@mipmap/back_icon"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/tv_add"
+        android:layout_toEndOf="@id/tv_back"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/edit_circle_bg"
+            android:gravity="center"
+            android:hint="@string/search"
+            android:textColor="@color/text_gray"
+            android:textSize="18sp" />
+
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:background="@mipmap/search_icon"
+            android:contentDescription="@string/search" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@mipmap/add_icon"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
+
+</RelativeLayout>

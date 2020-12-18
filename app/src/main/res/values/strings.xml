@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">GreenDaoDemo</string>
+    <string name="name">姓名</string>
+    <string name="hint_name">请输入姓名</string>
+    <string name="phone">电话</string>
+    <string name="hint_phone">请输入电话</string>
+    <string name="address">地址</string>
+    <string name="hint_address">请输入地址</string>
+    <string name="meal">套餐</string>
+    <string name="hint_meal">请输入套餐</string>
+    <string name="gift">礼物</string>
+    <string name="hint_gift">请输入礼物</string>
+    <string name="referrer">推荐人</string>
+    <string name="hint_referrer">请输入推荐人电话</string>
+    <string name="commit">提交</string>
+    <string name="search">搜索</string>
+</resources>
