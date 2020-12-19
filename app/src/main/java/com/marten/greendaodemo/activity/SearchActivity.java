@@ -2,6 +2,7 @@ package com.marten.greendaodemo.activity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -36,6 +37,13 @@ public class SearchActivity extends BaseActivity {
 
         mRvList.setLayoutManager(new LinearLayoutManager(context));
 
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         mEtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -51,6 +59,12 @@ public class SearchActivity extends BaseActivity {
                                 , UserInfoDao.Properties.UserPhone.eq(etStr))
                         .build().list();
                 adapter = new RightUserAdapter(userInfoList, context);
+                adapter.setItemClickListener(new RightUserAdapter.OnItemClickListener() {
+                    @Override
+                    public void itemClick() {
+                        return;
+                    }
+                });
                 mRvList.setAdapter(adapter);
             }
 
