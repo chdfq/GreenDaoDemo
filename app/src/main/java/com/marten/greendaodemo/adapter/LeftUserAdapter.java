@@ -22,7 +22,6 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
     private Context context;
     private int nowPosition;
 
-
     private OnItemClickListener listener;
 
     public LeftUserAdapter(List<UserInfo> list, Context context) {
@@ -30,7 +29,7 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
         this.context = context;
     }
 
-    public void setListener(OnItemClickListener listener) {
+    public void setItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -43,11 +42,11 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
 
     public void updateItem(int position) {
         //获取之前选中的user
-        UserInfo user2 = list.get(position);
+        UserInfo user2 = list.get(nowPosition);
         //之前选中的user设置成未选中状态
         user2.setSelected(false);
         //之前选中的user
-        notifyItemChanged(position, user2);
+        notifyItemChanged(nowPosition, user2);
 
         //获取当前点击（选中）的user
         UserInfo user3 = list.get(position);
@@ -69,7 +68,7 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull LeftUserAdapter.ViewHolder holder, int position) {
         final UserInfo user = list.get(position);
-        if (!user.getSelected()) {
+        if (user.getSelected()) {
             nowPosition = position;
             holder.mLlLeft.setBackgroundResource(R.color.light_gray);
         } else {
@@ -79,16 +78,22 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
         holder.mTvUserName.setText(user.getUserName());
         holder.mTvLevel.setText(String.format("(%s%s)", user.getLevel(), "级"));
         holder.mTvUserPhone.setText(user.getUserPhone());
-        if (user.getUserAddress() != null) {
+        if (user.getUserAddress() != null && !user.getUserAddress().equals("")) {
             holder.mTvUserAddress.setText(user.getUserAddress());
+        } else {
+            holder.mTvUserAddress.setText("无");
         }
-        if (user.getUserService() != null) {
+        if (user.getUserService() != null && !user.getUserService().equals("")) {
             holder.mTvUserService.setText(user.getUserService());
+        } else {
+            holder.mTvUserService.setText("无");
         }
-        if (user.getUserGift() != null) {
+        if (user.getUserGift() != null && !user.getUserGift().equals("")) {
             holder.mTvUserGift.setText(user.getUserGift());
+        } else {
+            holder.mTvUserGift.setText("无");
         }
-        if (user.getUpUser() != null) {
+        if (user.getUpUser() != null && !user.getUpUser().equals("")) {
             holder.mTvUpUser.setText(user.getUpUser());
         } else {
             holder.mTvUpUser.setText("无");
@@ -131,7 +136,7 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
         }
     }
 
-    interface OnItemClickListener {
+    public interface OnItemClickListener {
         void itemClick(int position, UserInfo user2);
     }
 

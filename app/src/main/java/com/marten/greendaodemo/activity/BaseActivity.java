@@ -17,16 +17,23 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private LinearLayout mLlBase;
     private TextView mTvTitle, mIvBack, mIvAdd;
     private RelativeLayout mRlEdit;
+    private RelativeLayout mRlTitleBar;
+
     private View view;
     private String title;
     public Context context;
+
+    public void hideTitleBar(){
+        mRlTitleBar.setVisibility(View.GONE);
+    }
 
     public RelativeLayout getEditText() {
         return mRlEdit;
     }
 
-    public TextView getBackImage() {
-        return mIvBack;
+
+    public void setRlEdit() {
+        mRlEdit.setVisibility(View.VISIBLE);
     }
 
     public void setBackImage() {
@@ -36,6 +43,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public TextView getAddImage() {
         return mIvAdd;
     }
+
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -52,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         context = BaseActivity.this;
         mLlBase = findViewById(R.id.ll_base);
         mTvTitle = findViewById(R.id.tv_title);
+        mRlTitleBar = findViewById(R.id.tl_title_bar);
         mRlEdit = findViewById(R.id.rl_search);
         mIvBack = findViewById(R.id.tv_back);
         mIvAdd = findViewById(R.id.tv_add);

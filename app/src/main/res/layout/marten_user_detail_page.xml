@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="电话"
             android:textColor="@color/blue"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_phone"
@@ -52,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/blue"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="地址"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_address"
@@ -75,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -90,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="套餐"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_service"
@@ -98,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -113,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="礼物"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_gift"
@@ -121,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -136,7 +135,7 @@
             android:layout_height="wrap_content"
             android:text="推荐人"
             android:textColor="@color/pink"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_up_user"
@@ -144,8 +143,85 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/pink"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="推荐Ta的人"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:background="@color/blue" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Ta推荐的人"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_detail_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="5dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_detail_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="5dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </LinearLayout>

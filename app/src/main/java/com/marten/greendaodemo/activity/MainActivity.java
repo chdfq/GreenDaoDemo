@@ -2,7 +2,9 @@ package com.marten.greendaodemo.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,29 +36,27 @@ public class MainActivity extends BaseActivity {
     private RelativeLayout mRvSearch;
     private TextView mIvAdd;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     public void initView() {
         contentView(R.layout.activity_main);
         mVpMain = findViewById(R.id.vp_main);
 
+        sharedPreferences = getSharedPreferences("maxLevel", MODE_PRIVATE);
+
         mIvAdd = getAddImage();
         mIvAdd.setVisibility(View.VISIBLE);
-        mIvAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //添加数据页面
-                startActivity(new Intent(context, CreateActivity.class));
-            }
+        mIvAdd.setOnClickListener(v -> {
+            //添加数据页面
+            startActivity(new Intent(context, CreateActivity.class));
         });
 
         mRvSearch = getEditText();
         mRvSearch.setVisibility(View.VISIBLE);
-        mRvSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
-                //查询数据页面
-            }
+        mRvSearch.setOnClickListener(v -> {
+            //查询数据页面
+            startActivity(new Intent(context, SearchActivity.class));
         });
 
         userInfoDao = DaoManager.getInstance().getDaoSession().getUserInfoDao();
@@ -73,12 +73,37 @@ public class MainActivity extends BaseActivity {
                     }, 100);
         }
 
-        CommonFragment commonFragment1 = new CommonFragment();
-        CommonFragment commonFragment2 = new CommonFragment();
+        CommonFragment commonFragment1 = CommonFragment.newInstance(1);
+        CommonFragment commonFragment2 = CommonFragment.newInstance(2);
         fragments.add(commonFragment1);
         fragments.add(commonFragment2);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         mVpMain.setAdapter(viewPagerAdapter);
+        mVpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //判断当前是不是最后一个Fragment，如果是则加载一个新的Fragment
+                int level = sharedPreferences.getInt("maxLevel", 1);
+                if (position == fragments.size() - 1) {
+                    if (level > position + 1) {
+                        Log.i("ma>>", "pos:" + position + "level:" + level + "size:" + fragments.size());
+                        //判断最低一级，position == level - 1
+                        fragments.add(CommonFragment.newInstance(position + 2));
+                        viewPagerAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 

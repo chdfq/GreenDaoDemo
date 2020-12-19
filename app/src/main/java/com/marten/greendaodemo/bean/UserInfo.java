@@ -34,8 +34,8 @@ public class UserInfo {
 
     @Generated(hash = 508738292)
     public UserInfo(Long id, String userName, String userPhone, String upUser,
-                    String userAddress, String userService, String userGift, int level,
-                    boolean selected) {
+            String userAddress, String userService, String userGift, int level,
+            boolean selected) {
         this.id = id;
         this.userName = userName;
         this.userPhone = userPhone;
@@ -50,7 +50,6 @@ public class UserInfo {
     @Generated(hash = 1279772520)
     public UserInfo() {
     }
-
 
     public Long getId() {
         return this.id;
@@ -123,4 +122,5 @@ public class UserInfo {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
 }

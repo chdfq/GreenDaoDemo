@@ -14,4 +14,5 @@
     <string name="hint_referrer">请输入推荐人电话</string>
     <string name="commit">提交</string>
     <string name="search">搜索</string>
+    <string name="hint_whole_search">请输入你要查询的人名/电话</string>
 </resources>

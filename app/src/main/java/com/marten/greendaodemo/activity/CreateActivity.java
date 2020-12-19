@@ -1,6 +1,6 @@
 package com.marten.greendaodemo.activity;
 
-import android.view.View;
+import android.content.SharedPreferences;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,10 +22,18 @@ public class CreateActivity extends BaseActivity {
     private String name;
     private String phone;
     private String upUserPhone;
+    private int level = 1;
+    private int lastLevel;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     public void initView() {
-        contentView(R.layout.activity_create_page);
+        contentView(R.layout.marten_create_page);
+        sharedPreferences = getSharedPreferences("maxLevel", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        lastLevel = sharedPreferences.getInt("maxLevel", 0);
         setTitle("添加用户信息");
         setBackImage();
         mEtName = findViewById(R.id.et_name);
@@ -38,22 +46,24 @@ public class CreateActivity extends BaseActivity {
 
         userInfoDao = DaoManager.getInstance().getDaoSession().getUserInfoDao();
 
-        mBtnCommit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userInfo = new UserInfo();
-                if (checkEt()) {
-                    userInfo.setUserName(name);
-                    userInfo.setUserPhone(phone);
-                    userInfo.setUpUser(upUserPhone);
-                    userInfo.setUserAddress(mEtAddress.getText().toString().trim());
-                    userInfo.setUserService(mEtService.getText().toString().trim());
-                    userInfo.setUserGift(mEtGift.getText().toString().trim());
+        mBtnCommit.setOnClickListener(v -> {
+            userInfo = new UserInfo();
+            if (checkEt()) {
+                userInfo.setUserName(name);
+                userInfo.setUserPhone(phone);
+                userInfo.setUpUser(upUserPhone);
+                userInfo.setUserAddress(mEtAddress.getText().toString().trim());
+                userInfo.setUserService(mEtService.getText().toString().trim());
+                userInfo.setUserGift(mEtGift.getText().toString().trim());
+                userInfo.setLevel(level);
+                userInfoDao.insert(userInfo);
 
-                    userInfoDao.insert(userInfo);
-
-                    finish();
+                if (level > lastLevel) {
+                    editor.putInt("maxLevel", level);
+                    editor.apply();
                 }
+
+                finish();
             }
         });
     }
@@ -101,6 +111,8 @@ public class CreateActivity extends BaseActivity {
                 if (upUser == null) {
                     Toast.makeText(context, "找不到推荐人信息", Toast.LENGTH_SHORT).show();
                     return false;
+                } else {
+                    level = upUser.getLevel() + 1;
                 }
             }
         }

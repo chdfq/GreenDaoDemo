@@ -1,16 +1,21 @@
 package com.marten.greendaodemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marten.greendaodemo.R;
+import com.marten.greendaodemo.activity.MainActivity;
+import com.marten.greendaodemo.activity.SearchActivity;
+import com.marten.greendaodemo.activity.UserDetailActivity;
 import com.marten.greendaodemo.bean.UserInfo;
 
 import java.util.ArrayList;
@@ -20,6 +25,11 @@ public class RightUserAdapter extends RecyclerView.Adapter<RightUserAdapter.View
 
     private List<UserInfo> list = new ArrayList<>();
     private Context context;
+    private RightUserAdapter.OnItemClickListener listener;
+
+    public void setItemClickListener(RightUserAdapter.OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public RightUserAdapter(List<UserInfo> list, Context context) {
         this.list = list;
@@ -47,16 +57,22 @@ public class RightUserAdapter extends RecyclerView.Adapter<RightUserAdapter.View
         holder.mTvUserName.setText(user.getUserName());
         holder.mTvLevel.setText(String.format("(%s%s)", user.getLevel(), "级"));
         holder.mTvUserPhone.setText(user.getUserPhone());
-        if (user.getUserAddress() != null) {
+        if (user.getUserAddress() != null && !user.getUserAddress().equals("")) {
             holder.mTvUserAddress.setText(user.getUserAddress());
+        } else {
+            holder.mTvUserAddress.setText("无");
         }
-        if (user.getUserService() != null) {
+        if (user.getUserService() != null && !user.getUserService().equals("")) {
             holder.mTvUserService.setText(user.getUserService());
+        } else {
+            holder.mTvUserService.setText("无");
         }
-        if (user.getUserGift() != null) {
+        if (user.getUserGift() != null && !user.getUserGift().equals("")) {
             holder.mTvUserGift.setText(user.getUserGift());
+        } else {
+            holder.mTvUserGift.setText("无");
         }
-        if (user.getUpUser() != null) {
+        if (user.getUpUser() != null && !user.getUpUser().equals("")) {
             holder.mTvUpUser.setText(user.getUpUser());
         } else {
             holder.mTvUpUser.setText("无");
@@ -64,7 +80,10 @@ public class RightUserAdapter extends RecyclerView.Adapter<RightUserAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context,UserDetailActivity.class);
+                intent.putExtra("userId",user.getId());
+                context.startActivity(intent);
+                listener.itemClick();
             }
         });
     }
@@ -95,6 +114,10 @@ public class RightUserAdapter extends RecyclerView.Adapter<RightUserAdapter.View
             mTvUserGift = itemView.findViewById(R.id.tv_gift);
             mTvUpUser = itemView.findViewById(R.id.tv_up_user);
         }
+    }
+
+    public interface OnItemClickListener {
+        void itemClick();
     }
 
     public void cleanAll() {
