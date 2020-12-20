@@ -39,7 +39,7 @@ public class RightUserAdapter extends RecyclerView.Adapter<RightUserAdapter.View
     public void addAll(List<UserInfo> users) {
         if (users != null && users.size() > 0) {
             list.addAll(users);
-            notifyItemChanged(list.size() - users.size(), users.size());
+            notifyItemRangeChanged(list.size() - users.size(), users.size());
         }
     }
 

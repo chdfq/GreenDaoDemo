@@ -36,7 +36,7 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
     public void addAll(List<UserInfo> users) {
         if (users != null && users.size() > 0) {
             list.addAll(users); //添加所有元素到列表中
-            notifyItemChanged(list.size() - users.size(), users.size());
+            notifyItemRangeChanged(list.size() - users.size(), users.size());
         }
     }
 
@@ -46,14 +46,14 @@ public class LeftUserAdapter extends RecyclerView.Adapter<LeftUserAdapter.ViewHo
         //之前选中的user设置成未选中状态
         user2.setSelected(false);
         //之前选中的user
-        notifyItemChanged(nowPosition, user2);
+        notifyItemChanged(nowPosition, "update before user item");
 
         //获取当前点击（选中）的user
         UserInfo user3 = list.get(position);
         //点击（选中）的user设置成选中状态
         user3.setSelected(true);
         //刷新
-        notifyItemChanged(position, user3);
+        notifyItemChanged(position, "update after user item");
         //把之前选中的位置替换成现在（点击）选中的位置
         nowPosition = position;
     }
